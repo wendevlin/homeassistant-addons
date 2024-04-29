@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.0.9
+
+- Fix webserver to use correct base url
+
 ## 1.0.8
 
 - Fix search inside ingress
