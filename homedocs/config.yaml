@@ -1,0 +1,32 @@
+name: Homedocs
+description: Document stuff with Markdown based on Astro Starlight
+version: "1.0.0"
+slug: homedocs
+init: false
+url: https://github.com/masterwendu/homeassistant-addons/tree/main/homedocs
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: services
+map:
+  - config:rw
+ingress: true
+ingress_port: 4321
+ports:
+  - 4321:null
+ports_description:
+  - 4321: "Webserver port"
+ports:
+  4321/tcp: null
+ports_description:
+  4321/tcp: Web interface (Not required for Ingress)
+panel_icon: mdi:text-box-outline
+panel_admin: false
+options:
+  buildTimeoutInSeconds: 60
+schema:
+  buildTimeoutInSeconds: int(10,)
+image: "ghcr.io/masterwendu/{arch}-addon-homedocs"

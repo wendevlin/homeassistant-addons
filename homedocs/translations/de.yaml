@@ -1,0 +1,4 @@
+configuration:
+  buildTimeoutInSeconds:
+    name: Bild-Timeout in Sekunden
+    description: Die Zeit, die das Add-On wartet, um einen neuen Build auszulösen, nachdem sich die Dokumentation geändert hat.

@@ -1,0 +1,4 @@
+configuration:
+  buildTimeoutInSeconds:
+    name: Build Timeout in Seconds
+    description: The amount of time the addon will wait to trigger a new build after a change in the docs.
