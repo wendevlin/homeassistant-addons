@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.0.4
+
+- Upgrade base images to 3.19
+
 ## 1.0.3
 
 - Use nodejs-current instead of nodejs in alpine linux

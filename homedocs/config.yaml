@@ -1,6 +1,6 @@
 name: Homedocs
 description: Document stuff with Markdown based on Astro Starlight
-version: "1.0.3"
+version: "1.0.4"
 slug: homedocs
 init: false
 url: https://github.com/masterwendu/homeassistant-addons/tree/main/homedocs
