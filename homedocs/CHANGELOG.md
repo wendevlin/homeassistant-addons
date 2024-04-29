@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.0.3
+
+- Use nodejs-current instead of nodejs in alpine linux
+
 ## 1.0.2
 
 - Remove armhf and armv7 support (bun is not supported on these platforms)

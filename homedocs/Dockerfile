@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Install requirements for add-on
-RUN apk add --update --no-cache nodejs npm bash ca-certificates wget
+RUN apk add --update --no-cache nodejs-current npm bash ca-certificates wget
 # Install glibc to run Bun
 RUN if [[ $(uname -m) == "aarch64" ]] ; \
     then \
