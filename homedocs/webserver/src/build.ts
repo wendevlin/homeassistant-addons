@@ -1,4 +1,5 @@
 import { $, type ShellError } from 'bun'
+import environmentVariables from './utils/environmentVariables'
 
 let buildRunning = false
 let buildQueued = false
@@ -16,7 +17,7 @@ export const buildDocs = async () => {
   console.time('🚀 build runtime')
   try {
     console.log('🚀 build started')
-    await $`cd ../starlight && bun run build`.quiet()
+    await $`cd ../starlight && bun run build --base ${environmentVariables.ingressEntry}`.quiet()
     console.log('🚀 build finished')
     await $`rm -rf ./public`
     await $`cp -r ../starlight/dist ./public`

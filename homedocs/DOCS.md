@@ -20,6 +20,9 @@ This addon helps you document stuff around your home inside home assistant in a 
 
 The documentation lies in your `config` directory under `homedocs`. When you edit or add/remove the markdown files, your changes will be build after the build timeout and you will see the changes inside the webui.
 
+__Each markdown file needs to have a frontmatter at the beginning of the file.__
+Checkout the examples.
+
 #### Use the Studio Code Server addon
 
 I recommend to use the [Studio Code Server](https://github.com/hassio-addons/addon-vscode) to edit your documentation, because it is very convenient to edit markdown files with it and you can just drag and drop files into the addon.

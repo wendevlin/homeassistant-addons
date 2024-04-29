@@ -11,7 +11,7 @@ export const startServer = async (port: number) => {
     )
     .use(
       staticPlugin({
-        // neccessary to use server outside of ingress too
+        // neccessary to use search in ingress
         prefix: environmentVariables.ingressEntry,
       }),
     )
