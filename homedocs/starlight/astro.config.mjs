@@ -15,7 +15,7 @@ export default defineConfig({
   integrations: [starlight({
     title: 'Homedocs',
     logo: {
-      src: './src/icon.svg',
+      src: './src/assets/icons/icon.svg',
       replacesTitle: true
     },
     customCss: ['./src/styles/custom.css']

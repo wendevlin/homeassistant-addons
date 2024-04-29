@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.0.6
+
+- Fix navbar logo
+
 ## 1.0.5
 
 - Remove armhf and i386 support (bun is not supported on these platform)
