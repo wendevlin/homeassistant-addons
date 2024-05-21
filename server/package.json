@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/html": "1.0.2",
+    "@gtramontina.com/elysia-tailwind": "2.0.0",
+    "@tailwindcss/typography": "0.5.13",
+    "autoprefixer": "10.4.19",
+    "daisyui": "4.11.1",
+    "elysia": "1.0.16",
+    "markdown-it": "14.1.0",
+    "markdown-it-front-matter": "0.2.4",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.3",
+    "zod": "3.23.6"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "14.1.1",
+    "bun-types": "1.1.6"
+  },
+  "module": "src/index.js"
+}
