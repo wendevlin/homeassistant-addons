@@ -15,11 +15,24 @@ const tailwindConfig: Config = {
     daisyui,
   ],
   daisyui: {
-    themes: [],
+    "light": {
+      "primary": "#c0dcea",
+      "secondary": "#00384b",
+      "accent": "#00769b",
+      "neutral": "#181819",
+      "base-100": "#ffffff",
+    },
+    "dark": {
+      "primary": "#042836",
+      "secondary": "#a9cfe1",
+      "accent": "#007498",
+      "neutral": "#ffffff",
+      "base-100": "#181819",
+    }
   }
 }
 
-export const tailwind = async () => {
+export const buildCss = async () => {
 	const sourceText = await Bun.file('./src/css/main.css').text()
   const tailwind = tw(tailwindConfig)
   const autoprefixerPlugin = autoprefixer()
@@ -30,11 +43,5 @@ export const tailwind = async () => {
     }
   )
 
-	return new Elysia({ name: "tailwind" }).get(
-		'/main.css',
-		async ({ set }) => {
-			set.headers["content-type"] = "text/css";
-			return css;
-		},
-	);
+  await Bun.write('./dist/main.css', css)
 };

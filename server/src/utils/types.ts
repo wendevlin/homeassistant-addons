@@ -4,7 +4,8 @@ export type MarkdownPath = {
 }
 
 export type NavigationEntry = {
+  mainIndex?: boolean,
   title: string,
   path?: string,
-  children: NavigationEntry[]
+  children?: NavigationEntry[]
 }

@@ -1,4 +1,4 @@
-import { tailwind } from './utils/tailwind'
+import { buildCss } from './utils/tailwind'
 import { Elysia } from 'elysia'
 import { splitPaths } from "./utils/pathResolver";
 import { file } from "bun";
@@ -17,12 +17,18 @@ import jsxContent from './templates/content'
 
 const DOCS_BASE_PATH = 'docs'
 
+await buildCss()
+
 const app = new Elysia()
-  .use(tailwind())
   .use(html())
   .get(
     '*',
     async ({ path, set }) => {
+      if (path.endsWith('main.css')) {
+        set.headers["content-type"] = "text/css";
+        return Bun.file('./dist/main.css')
+      }
+
       const paths = splitPaths(path)
       const markdownFile = file(`${DOCS_BASE_PATH}/${paths.folder}/${paths.fileName}`)
 

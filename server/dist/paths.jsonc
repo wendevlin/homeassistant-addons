@@ -1,0 +1,6 @@
+{
+  "/": "index.html",
+  "/amazing/spiderman": "/amazing/spiderman.html",
+  "/amazing/venom": "/amazing/venom.html",
+  "/amazing/venom/superpowers": "/amazing/superpowers/superpowers.html"  
+}

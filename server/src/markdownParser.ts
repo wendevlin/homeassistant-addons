@@ -1,29 +1,33 @@
-import { BunFile } from 'bun';
+import { readFile } from 'node:fs/promises';
 import markdownit from 'markdown-it'
-import frontmatter from 'markdown-it-front-matter'
+import type Markdownit from 'markdown-it'
+import { full as emoji } from 'markdown-it-emoji'
+import { frontMatterPlugin } from './frontMatterPlugin';
 
-const extractFrontmatter = (frontmatter: any, env: any) => {
-  if (frontmatter.title) {
-    titles[env.filename] = frontmatter.title
+export interface MarkdownIt extends Markdownit {
+  frontMatter?: {
+    title?: string
   }
 }
 
 const md = markdownit({
   linkify: true,
 })
-.use(frontmatter, extractFrontmatter)
+  .use(emoji)
+  .use(frontMatterPlugin) as MarkdownIt
 
-const titles: Record<string, string> = {}
 
-const parseFile = async (filename: string, file: BunFile) => {
-  const markdownContent = await file.text()
-  const htmlContent = md.render(markdownContent, {
-    filename,
-  })
+export const parseFile = async (filePath: string, filename: string) => {
+  const markdownContent= await readFile(filePath, 'utf-8')
+  const htmlContent = md.render(markdownContent, { filePath })
+
+  let title = filePath === 'index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
+  if (md.frontMatter?.title) {
+    title = md.frontMatter.title
+  }
+
   return {
-    title: titles[filename] ?? file.name,
+    title,
     content: htmlContent,
   }
 }
-
-export default parseFile
