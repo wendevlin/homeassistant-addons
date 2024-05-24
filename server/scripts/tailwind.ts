@@ -1,9 +1,9 @@
-import Elysia from 'elysia'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import tw, { type Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
+import cssnano from 'cssnano'
 
 const tailwindConfig: Config = {
   content: ["./src/**/*.tsx"],
@@ -36,7 +36,13 @@ export const buildCss = async () => {
 	const sourceText = await Bun.file('./src/css/main.css').text()
   const tailwind = tw(tailwindConfig)
   const autoprefixerPlugin = autoprefixer()
-  const { css } = await postcss([tailwind, autoprefixerPlugin]).process(
+  const { css } = await postcss([
+    tw(tailwindConfig),
+    autoprefixer(),
+    cssnano({
+      preset: 'default',
+    }),
+  ]).process(
     sourceText,
     {
       from: './src/css/main.css',

@@ -1,4 +1,4 @@
-import { buildCss } from './utils/tailwind'
+import { buildCss } from '../scripts/tailwind'
 import { Elysia } from 'elysia'
 import { splitPaths } from "./utils/pathResolver";
 import { file } from "bun";
