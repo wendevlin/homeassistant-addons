@@ -2,9 +2,10 @@ import { buildCss } from '../scripts/tailwind'
 import { Elysia } from 'elysia'
 import { splitPaths } from "./utils/pathResolver";
 import { file } from "bun";
-import { html } from '@elysiajs/html'
-import markdownParser from './markdownParser'
 import jsxContent from './templates/content'
+import { webserver } from './webserver';
+import { buildDocs } from './htmlBuilder';
+import { startWatcher } from './fileWatcher';
 
 // 2 parts
 // 1. markdown to html watcher
@@ -17,34 +18,21 @@ import jsxContent from './templates/content'
 
 const DOCS_BASE_PATH = 'docs'
 
-await buildCss()
+// if dev mode only rebuild css
+if (process.env.NODE_ENV !== 'production') {
+  console.log(`Homedocs is running in development mode`)
+  await buildCss()
+  console.log(`Css built`)
+}
 
-const app = new Elysia()
-  .use(html())
-  .get(
-    '*',
-    async ({ path, set }) => {
-      if (path.endsWith('main.css')) {
-        set.headers["content-type"] = "text/css";
-        return Bun.file('./dist/main.css')
-      }
+await buildDocs()
+console.log('Initial docs built')
 
-      const paths = splitPaths(path)
-      const markdownFile = file(`${DOCS_BASE_PATH}/${paths.folder}/${paths.fileName}`)
-
-      if (!await markdownFile.exists()) {
-        set.status = 404
-        return `${path} has no markdown file`
-      } else {
-        const markdown = await markdownParser(paths.fileName, markdownFile)
-
-			  set.headers["content-type"] = 'text/html; charset=utf8'
-        return jsxContent(markdown.title, markdown.content)
-      }
-    }
-  )
+webserver
   .listen(3000)
 
+startWatcher()
+
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+  `🦊 Elysia is running at ${webserver.server?.hostname}:${webserver.server?.port}`
 );

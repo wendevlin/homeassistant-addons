@@ -32,6 +32,11 @@ const tailwindConfig: Config = {
   }
 }
 
+/**
+ * Builds the CSS file using Tailwind CSS and PostCSS.
+ * Since the structure of the HTML Template is not changing during runtime this runs just runs before docker image is built.
+ * @returns {Promise<void>} A promise that resolves when the CSS file is built.
+ */
 export const buildCss = async () => {
 	const sourceText = await Bun.file('./src/css/main.css').text()
   const tailwind = tw(tailwindConfig)

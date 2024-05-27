@@ -5,7 +5,9 @@ export type MarkdownPath = {
 
 export type NavigationEntry = {
   mainIndex?: boolean,
+  htmlContent?: string,
   title: string,
   path?: string,
-  children?: NavigationEntry[]
+  children?: NavigationEntry[],
+  pathPrefix?: string,
 }

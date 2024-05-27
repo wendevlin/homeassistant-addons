@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises';
 import markdownit from 'markdown-it'
 import type Markdownit from 'markdown-it'
 import { full as emoji } from 'markdown-it-emoji'
@@ -18,11 +17,14 @@ const md = markdownit({
 
 
 export const parseFile = async (filePath: string, filename: string) => {
-  const markdownContent= await readFile(filePath, 'utf-8')
+  const markdownContentFile= Bun.file(filePath)
+  console.log('markdownparse', filePath, filename, await markdownContentFile.exists())
+  const markdownContent = await markdownContentFile.text()
   const htmlContent = md.render(markdownContent, { filePath })
 
-  let title = filePath === 'index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
+  let title = filePath === 'docs/index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
   if (md.frontMatter?.title) {
+    console.log('markdown frontmatter')
     title = md.frontMatter.title
   }
 

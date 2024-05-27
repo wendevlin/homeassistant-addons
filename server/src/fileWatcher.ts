@@ -1,22 +1,28 @@
 import chokidar from "chokidar";
+import { buildDocs } from "./htmlBuilder";
+import environmentVariables from "./utils/environmentVariables";
 
-chokidar.watch('./docs').on('all', (event, path) => {
-  console.log(`Detected ${event} in ${path}`);
-});
+let timeout: Timer | null = null
 
-// const watcher = watch(
-//   './docs',
-//   { recursive: true },
-//   (event, filename) => {
-//     console.log(`Detected ${event} in ${filename}`);
-//     // created or delete --> rebuild navigation (after delay, so we can wait till all events are finished)
-//   },
-// )
+const triggerNewBuild = async () => {
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 
-// process.on("SIGINT", () => {
-//   // close watcher when Ctrl-C is pressed
-//   console.log("Closing watcher...");
-//   watcher.close();
+  timeout = setTimeout(
+    async () => {
+      console.log('Triggering new build')
+      await buildDocs()
+      console.log('Docs rebuilt')
+    },
+    1000
+  )
+}
 
-//   process.exit(0);
-// });
+export const startWatcher = () => {
+  chokidar.watch(environmentVariables.docsBasePath).on('all', (event, path) => {
+    // TODO do not rebuild everything, only if needed
+    triggerNewBuild()
+  })
+  console.log('Watcher started')
+}

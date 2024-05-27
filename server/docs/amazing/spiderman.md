@@ -1,5 +1,5 @@
 Hallo spiderman
 
-[venom](./venom/index.md)
+[venom](./venom)
 
 maaaan

@@ -1,24 +1,22 @@
 import { NavigationEntry } from "../utils/types";
 
-export const generateNavigation = (navigation: NavigationEntry[], pathPrefix: string, subpath = false) => (
-<ul class={!subpath ? 'menu bg-base-200 w-56 rounded-box' : ''}>
-  {navigation.map(({ title, children, path }) => (
-    <li>
-      {!children && <a href={`/${pathPrefix}${path}`}>{ title }</a> }
-      {!!children && (
-        <details open>
-          <summary>
-            {!path ? (
-              title
-            ) : (
-              <a href={`/${pathPrefix}${path}`}>{ title }</a>
-            )
-            }
-          </summary>
-          {generateNavigation(children, pathPrefix, true)}
-        </details>
-    )}
-    </li>
-  ))}
+const subNavigation = (navigation: NavigationEntry[], pathPrefix: string, active: NavigationEntry) => (
+  <>
+    {navigation.map(({ title, children, path }) => (
+      <li>
+        {path === undefined ? (<span class="hover:bg-base-200 hover:cursor-default">{title}</span>) : (<a class={[title === active.title && path === active.path ? 'bg-primary text-white' : '']} href={`${pathPrefix}${path}`}>{ title }</a>)}
+        {!!children ? (
+          <ul>
+              {subNavigation(children, pathPrefix, active)}
+          </ul>
+      ) : ''}
+      </li>
+    ))}
+  </>
+)
+
+export const generateNavigation = (navigation: NavigationEntry[], pathPrefix: string, active: NavigationEntry) => (
+<ul class="menu w-56 rounded-box">
+  {subNavigation(navigation, pathPrefix, active)}
 </ul>
 )
