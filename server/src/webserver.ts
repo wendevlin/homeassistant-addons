@@ -14,6 +14,8 @@ export const webserver = new Elysia()
       if (fileName === 'main.css') {
         set.headers["content-type"] = "text/css";
         return Bun.file('./dist/main.css')
+      } else if (fileName === 'favicon.svg') {
+        return Bun.file('./public/favicon.svg')
       } else if (fileName.includes('.') && (fileName.split('.').pop()?.length ?? 0) > 1) {
         const file = Bun.file(`${environmentVariables.docsBasePath}/${path}`)
         if (!await file.exists()) {
@@ -36,6 +38,8 @@ export const webserver = new Elysia()
       }
 
       set.status = status
+      
+      set.headers["content-type"] = "text/html";
       return responseData
     }
   )

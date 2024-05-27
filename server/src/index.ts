@@ -34,5 +34,5 @@ webserver
 startWatcher()
 
 console.log(
-  `🦊 Elysia is running at ${webserver.server?.hostname}:${webserver.server?.port}`
+  `🦊 Elysia is running at ${webserver.server?.url}`
 );

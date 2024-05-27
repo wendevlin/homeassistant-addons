@@ -22,7 +22,12 @@ export const parseFile = async (filePath: string, filename: string) => {
   const markdownContent = await markdownContentFile.text()
   const htmlContent = md.render(markdownContent, { filePath })
 
-  let title = filePath === 'docs/index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
+  let title = filename
+
+  if (title.endsWith('.md')) {
+    title = filePath === 'docs/index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
+  }
+
   if (md.frontMatter?.title) {
     console.log('markdown frontmatter')
     title = md.frontMatter.title

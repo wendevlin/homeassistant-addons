@@ -15,7 +15,7 @@ const buildHtml = async (navigationEntry: NavigationEntry, fullNavigationStructu
   const fileName = `./dist/docs/${navigationEntry.path || 'index'}.html`
   await Bun.write(
     fileName,
-    html,
+    `<!doctype html>${html}`,
   )
   console.log(`Built ${fileName}`)
 }
