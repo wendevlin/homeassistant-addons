@@ -25,13 +25,13 @@ if (process.env.NODE_ENV !== 'production') {
   console.log(`Css built`)
 }
 
-await buildDocs()
-console.log('Initial docs built')
+startWatcher()
+// await buildDocs()
+// console.log('Initial docs built')
 
 webserver
   .listen(3000)
 
-startWatcher()
 
 console.log(
   `🦊 Elysia is running at ${webserver.server?.url}`

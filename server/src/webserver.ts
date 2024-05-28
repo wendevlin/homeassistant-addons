@@ -17,8 +17,10 @@ export const webserver = new Elysia()
       } else if (fileName === 'favicon.svg') {
         return Bun.file('./public/favicon.svg')
       } else if (fileName.includes('.') && (fileName.split('.').pop()?.length ?? 0) > 1) {
+        console.log('da?')
         const file = Bun.file(`${environmentVariables.docsBasePath}/${path}`)
         if (!await file.exists()) {
+          console.log('not found', `${environmentVariables.docsBasePath}/${path}`)
           set.status = 404
         }
         responseData = file
@@ -43,3 +45,7 @@ export const webserver = new Elysia()
       return responseData
     }
   )
+  .onError(({ error, code }) => {
+    console.log('error')
+    console.error(error)
+  })

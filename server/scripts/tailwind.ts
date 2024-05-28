@@ -8,28 +8,20 @@ import cssnano from 'cssnano'
 const tailwindConfig: Config = {
   content: ["./src/**/*.tsx"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        nav: '#f6f6f6',
+        'nav-dark': '#272628',
+        active: '#00769b',
+        'active-dark': '#a9cfe1',
+      },
+    },
   },
   plugins: [
     typography,
     daisyui,
   ],
-  daisyui: {
-    "light": {
-      "primary": "#c0dcea",
-      "secondary": "#00384b",
-      "accent": "#00769b",
-      "neutral": "#181819",
-      "base-100": "#ffffff",
-    },
-    "dark": {
-      "primary": "#042836",
-      "secondary": "#a9cfe1",
-      "accent": "#007498",
-      "neutral": "#ffffff",
-      "base-100": "#181819",
-    }
-  }
+  daisyui: {}
 }
 
 /**
