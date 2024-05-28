@@ -21,7 +21,10 @@ const tailwindConfig: Config = {
     typography,
     daisyui,
   ],
-  daisyui: {}
+  daisyui: {
+    themes: ['lofi', 'black'],
+    darkTheme: 'black',
+  }
 }
 
 /**
