@@ -2,6 +2,10 @@
 
 ## 2.0.0
 
+- Use pre built image
+
+## 2.0.0
+
 - **BREAKING** The /config/homedocs directory doesn't need the content/docs, assets and files folder anymore. All content is now directly in the /config/homedocs folder.
 - Homedocs rewritten without astro. Uses now an elysia webserver and markdown-it for rendering markdown.
 - **BREAKING** Config changed and internal ports changed. I recommend to uninstall and reinstall the addon. Your markdown data will be kept in the home assistant config folder.

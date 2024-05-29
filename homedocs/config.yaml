@@ -1,6 +1,6 @@
 name: Homedocs
 description: Document stuff with Markdown
-version: "2.0.0"
+version: "2.0.1"
 slug: homedocs
 init: false
 url: https://github.com/masterwendu/homeassistant-addons/tree/main/homedocs
@@ -21,4 +21,4 @@ ports_description:
   3000/tcp: Web interface (Not required for Ingress)
 panel_icon: mdi:text-box-outline
 panel_admin: false
-# image: "ghcr.io/masterwendu/{arch}-addon-homedocs"
+image: "ghcr.io/masterwendu/{arch}-addon-homedocs"
