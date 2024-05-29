@@ -4,7 +4,7 @@ import { full as emoji } from 'markdown-it-emoji'
 import { frontMatterPlugin } from './frontMatterPlugin';
 
 export interface MarkdownIt extends Markdownit {
-  frontMatter?: {
+  frontMatterData?: {
     title?: string
   }
 }
@@ -18,7 +18,6 @@ const md = markdownit({
 
 export const parseFile = async (filePath: string, filename: string) => {
   const markdownContentFile= Bun.file(filePath)
-  console.log('markdownparse', filePath, filename, await markdownContentFile.exists())
   const markdownContent = await markdownContentFile.text()
   const htmlContent = md.render(markdownContent, { filePath })
 
@@ -28,13 +27,15 @@ export const parseFile = async (filePath: string, filename: string) => {
     title = filePath === 'docs/index.md' ? 'Homedocs' : filename.substring(0, filename.length - 3)
   }
 
-  if (md.frontMatter?.title) {
-    console.log('markdown frontmatter')
-    title = md.frontMatter.title
+  if (md.frontMatterData?.title) {
+    title = md.frontMatterData.title
   }
+  md.frontMatterData = {} // reset frontmatter data
 
   return {
     title,
     content: htmlContent,
   }
 }
+
+await parseFile('./docs/my/index.md', 'my')

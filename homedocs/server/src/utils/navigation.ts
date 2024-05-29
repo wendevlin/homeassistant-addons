@@ -18,16 +18,20 @@ export const generateNavForFolder = async (folder: string, pathPrefix = ''): Pro
     if (stats.isDirectory()) {
       const children = await generateNavForFolder(`${folder}/${fileOrFolder}`, `${pathPrefix}${fileOrFolder}/`)
       if (children.length > 0) {
-        const index = children.findIndex(child => child.title === 'index' && child.path !== undefined) 
+        const index = children.findIndex(child => child.subIndex && child.path !== undefined) 
         if (index > -1) {
-          const { title, content } = await parseFile(`${folder}/${fileOrFolder}/index.md`, fileOrFolder)
-          const path = children[index].path!
+          const indexChild = children[index]
+          // const { title, content } = await parseFile(`${folder}/${fileOrFolder}/index.md`, fileOrFolder)
+
+          const path = indexChild.path!
+
+          children.splice(index, 1)
 
           level.push({
-            title: title ?? fileOrFolder,
+            title: indexChild.title ?? fileOrFolder,
             path,
-            children: children.filter(child => child.title !== 'index'),
-            htmlContent: content,
+            children,
+            htmlContent: indexChild.htmlContent,
             pathPrefix: `${!path.includes('/') ? '.' : ''}${path.split('/').slice(0, -1).map(() => '..').join('/')}/`
           })
         } else {
@@ -52,6 +56,7 @@ export const generateNavForFolder = async (folder: string, pathPrefix = ''): Pro
       // TODO add relative path to be used in generating navigation
       level.push({
         mainIndex,
+        subIndex: fileName === 'index',
         title,
         path,
         children: [],

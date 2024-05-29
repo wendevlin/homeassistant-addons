@@ -24,10 +24,6 @@ RUN npm install -g bun
 # Copy starlight data
 COPY server /server
 WORKDIR /server
-RUN bun install
-
-# build server and css
-RUN NODE_ENV=production bun run build 
 
 # copy and setup run script
 COPY run.sh /

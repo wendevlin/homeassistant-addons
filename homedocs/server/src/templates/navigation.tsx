@@ -27,7 +27,7 @@ const subNavigation = (navigation: NavigationEntry[], pathPrefix: string, active
 )
 
 export const generateNavigation = (navigation: NavigationEntry[], pathPrefix: string, active: NavigationEntry) => (
-<ul class="menu w-64 bg-nav dark:bg-nav-dark h-full py-5 pr-5">
+<ul class="menu w-64 bg-nav dark:bg-nav-dark h-full py-5 pr-5 flex-nowrap overflow-auto">
   {subNavigation(navigation, pathPrefix, active)}
 </ul>
 )

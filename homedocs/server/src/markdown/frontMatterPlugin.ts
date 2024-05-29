@@ -34,9 +34,7 @@ export const frontMatterPlugin = (md: MarkdownIt) => {
       marker_char = marker_str.charCodeAt(0),
       marker_len  = marker_str.length;
 
-  const frontMatter = (state: StateBlock, startLine: number, endLine: number, silent: boolean) => {
-    md.frontMatter = {} // reset frontmatter
-    
+  const frontMatter = (state: StateBlock, startLine: number, endLine: number, silent: boolean) => {   
     // Check out the first character of the first line quickly,
     // this should filter out non-front matter
     if (startLine !== 0 || marker_char !== state.src.charCodeAt(0)) {
@@ -150,13 +148,16 @@ export const frontMatterPlugin = (md: MarkdownIt) => {
     try {
       const frontMatterObject: Record<string, string> = {}
       token.meta.split('\n').forEach((line: string) => {
-        const [key, value] = line.split(':')
-        frontMatterObject[key.trim()] = value.trim()
+        const [key = '', value = ''] = line.split(':')
+        if (key && value) {
+          console.log('frontmatter', key, value)
+          frontMatterObject[key.trim()] = value.trim()
+        }
       })
-      md.frontMatter = frontMatterObject
+      md.frontMatterData = frontMatterObject
     } catch (e) {
       console.error(`Error in frontMatterPlugin, frontmatter extraction failed and will be skipped for ${state.env.filePath ?? '?'}. Please check if your frontmatter syntax is correct.`)
-      // console.error(e) // TODO add debug mode
+      console.error(e) // TODO add debug mode
     }
 
     return true

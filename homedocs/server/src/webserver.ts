@@ -6,7 +6,7 @@ export const webserver = new Elysia()
   .use(Logestic.preset('common'))
   .get(
     '*',
-    async ({ path, set }) => {
+    async ({ path, set, headers }) => {
       let status = 200
       let responseData: any = `${path} not found` // TODO return styled 404 page
 
@@ -17,7 +17,10 @@ export const webserver = new Elysia()
       } else if (fileName === 'favicon.svg') {
         return Bun.file('./public/favicon.svg')
       } else if (fileName.includes('.') && (fileName.split('.').pop()?.length ?? 0) > 1) {
-        console.log('da?')
+        console.log('da')
+        console.log(headers.referer)
+
+
         const file = Bun.file(`${environmentVariables.docsBasePath}/${path}`)
         if (!await file.exists()) {
           console.log('not found', `${environmentVariables.docsBasePath}/${path}`)

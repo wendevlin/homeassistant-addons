@@ -4,6 +4,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "start:production": "NODE_ENV=production bun src/index.ts",
     "build": "bun run --bun scripts/build.ts"
   },
   "dependencies": {
