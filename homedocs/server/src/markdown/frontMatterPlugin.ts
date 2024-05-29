@@ -50,7 +50,7 @@ export const frontMatterPlugin = (md: MarkdownIt) => {
 		// while pos <= 3
 		let start = state.bMarks[startLine] + state.tShift[startLine]
 		let max = state.eMarks[startLine]
-		let start_content: number
+		let start_content = 0
 		let pos: number
 		for (pos = start + 1; pos <= max; pos++) {
 			if (marker_str[(pos - start) % marker_len] !== state.src[pos]) {
@@ -155,7 +155,6 @@ export const frontMatterPlugin = (md: MarkdownIt) => {
 			for (const line of token.meta.split('\n')) {
 				const [key = '', value = ''] = line.split(':')
 				if (key && value) {
-					console.log('frontmatter', key, value)
 					frontMatterObject[key.trim()] = value.trim()
 				}
 			}

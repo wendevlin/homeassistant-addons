@@ -11,6 +11,7 @@ export interface MarkdownIt extends Markdownit {
 
 const md = markdownit({
 	linkify: true,
+	html: true,
 })
 	.use(emoji)
 	.use(frontMatterPlugin) as MarkdownIt
@@ -39,5 +40,3 @@ export const parseFile = async (filePath: string, filename: string) => {
 		content: htmlContent,
 	}
 }
-
-await parseFile('./docs/my/index.md', 'my')

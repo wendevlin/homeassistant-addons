@@ -25,6 +25,9 @@ RUN npm install -g bun
 COPY server /server
 WORKDIR /server
 
+RUN bun install
+RUN bun run build
+
 # copy and setup run script
 COPY run.sh /
 RUN chmod a+x /run.sh

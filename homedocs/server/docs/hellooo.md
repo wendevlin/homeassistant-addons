@@ -1,7 +1,0 @@
-hello world
-
-:wave:
-
-🌊🌊
-
-nice

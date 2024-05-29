@@ -6,7 +6,7 @@ if [ -z "$(ls -A /config/homedocs)" ]; then
     echo "created /config/homedocs directory."
 
     # copy the example contents of the "/starlight/src/content/docs" directory to the "/config/homedocs" directory.
-    cp -r /server/docs /config/homedocs
+    cp -r /server/docs/* /config/homedocs
     echo "copied example content to /config/homedocs."
 else
     echo "/config/homedocs is not empty, skipping copy example content."
@@ -19,4 +19,4 @@ fi
 # BUILD_TIMEOUT_IN_SECONDS=$(bashio::config 'buildTimeoutInSeconds')
 
 # start the webserver
-NODE_ENV=production DOCS_BASE_PATH=/config/homedocs bun run start:production
+DOCS_BASE_PATH=/config/homedocs bun run start:production

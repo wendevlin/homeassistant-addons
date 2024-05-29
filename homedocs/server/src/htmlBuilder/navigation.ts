@@ -25,14 +25,14 @@ export const generateNavForFolder = async (
 				)
 				if (index > -1) {
 					const indexChild = children[index]
-					// const { title, content } = await parseFile(`${folder}/${fileOrFolder}/index.md`, fileOrFolder)
 
 					const path = indexChild.path!
 
 					children.splice(index, 1)
 
 					level.push({
-						title: indexChild.title ?? fileOrFolder,
+						title:
+							indexChild.title !== 'index' ? indexChild.title : fileOrFolder,
 						path,
 						children,
 						htmlContent: indexChild.htmlContent,

@@ -1,11 +1,13 @@
 import type { BunFile } from 'bun'
 import { Elysia } from 'elysia'
-import { Logestic } from 'logestic'
 import environmentVariables from './utils/environmentVariables'
 
-export const webserver = new Elysia()
-	.use(Logestic.preset('common'))
-	.get('*', async ({ path, set, headers }) => {
+export const webserver = new Elysia({
+	serve: {
+		hostname: '0.0.0.0',
+	},
+})
+	.get('*', async ({ path, set }) => {
 		const status = 200
 		let responseData: BunFile | string = `${path} not found` // TODO return styled 404 page
 
@@ -19,15 +21,13 @@ export const webserver = new Elysia()
 			fileName.includes('.') &&
 			(fileName.split('.').pop()?.length ?? 0) > 1
 		) {
-			console.log('da')
-			console.log(headers.referer)
-
 			const file = Bun.file(`${environmentVariables.docsBasePath}/${path}`)
 			if (!(await file.exists())) {
 				console.log('not found', `${environmentVariables.docsBasePath}/${path}`)
 				set.status = 404
 			}
 			responseData = file
+			set.headers['content-type'] = file.type
 		} else {
 			let htmlFile = Bun.file(`./dist/docs/${path}.html`)
 
@@ -37,9 +37,11 @@ export const webserver = new Elysia()
 					set.status = 404
 				} else {
 					responseData = htmlFile
+					set.headers['content-type'] = htmlFile.type
 				}
 			} else {
 				responseData = htmlFile
+				set.headers['content-type'] = htmlFile.type
 			}
 		}
 

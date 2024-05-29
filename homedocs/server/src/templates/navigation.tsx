@@ -11,7 +11,7 @@ const subNavigation = (
 				{path === undefined ? (
 					<span class="hover:bg-nav dark:hover:bg-nav-dark hover:cursor-default">
 						<svg
-							class="w-4 -ml-1 -mr-1"
+							class="w-4 -ml-1 -mr-1 dark:fill-white"
 							aria-hidden="true"
 							viewBox="-43.52 -43.52 599.04 599.04"
 						>
