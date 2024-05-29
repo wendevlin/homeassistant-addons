@@ -1,9 +1,9 @@
 import { Elysia } from 'elysia'
-import { splitPaths } from "./utils/pathResolver";
-import { file } from "bun";
+import { Logestic } from 'logestic'
 import environmentVariables from './utils/environmentVariables';
 
 export const webserver = new Elysia()
+  .use(Logestic.preset('common'))
   .get(
     '*',
     async ({ path, set }) => {

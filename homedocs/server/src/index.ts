@@ -16,8 +16,6 @@ import { startWatcher } from './fileWatcher';
 // 1. alles muss relative parts haben, css gibt es nur im root und wirkt korrekt relativ aufgelöst
 // 1. bilder werden dazu kopiert und relativ verlinkt
 
-const DOCS_BASE_PATH = 'docs'
-
 // if dev mode only rebuild css
 if (process.env.NODE_ENV !== 'production') {
   console.log(`Homedocs is running in development mode`)

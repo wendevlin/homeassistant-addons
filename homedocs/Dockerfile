@@ -26,15 +26,11 @@ COPY server /server
 WORKDIR /server
 RUN bun install
 
-# copy and setup webserver
-COPY webserver/dist/index.js /webserver/index.js
-COPY webserver/src/templates /webserver/templates
-RUN mkdir -p /webserver/public
+# build server and css
+RUN NODE_ENV=production bun run build 
 
 # copy and setup run script
 COPY run.sh /
 RUN chmod a+x /run.sh
-
-WORKDIR /webserver
 
 CMD [ "/run.sh" ]

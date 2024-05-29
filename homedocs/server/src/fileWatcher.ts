@@ -1,4 +1,4 @@
-import chokidar from "chokidar";
+import chokidar from 'chokidar'
 import { buildDocs } from "./htmlBuilder";
 import environmentVariables from "./utils/environmentVariables";
 
@@ -20,9 +20,9 @@ const triggerNewBuild = async () => {
 }
 
 export const startWatcher = () => {
-  chokidar.watch(environmentVariables.docsBasePath).on('all', (event, path) => {
+  chokidar.watch(environmentVariables.docsBasePath).on('all', () => {
     // TODO do not rebuild everything, only if needed
     triggerNewBuild()
   })
-  console.log('Watcher started')
+  console.log(`Watcher started, watching for changes in "${environmentVariables.docsBasePath}" folder`)
 }
