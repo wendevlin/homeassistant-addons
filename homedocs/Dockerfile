@@ -22,22 +22,14 @@ RUN if [[ $(uname -m) == "aarch64" ]] ; \
 RUN npm install -g bun
 
 # Copy starlight data
-COPY starlight /starlight
-WORKDIR /starlight
-RUN bun install
+COPY server /server
+WORKDIR /server
 
-# copy and setup webserver
-COPY webserver/dist/index.js /webserver/index.js
-COPY webserver/src/templates /webserver/templates
-RUN mkdir -p /webserver/public
+RUN bun install
+RUN bun run build
 
 # copy and setup run script
 COPY run.sh /
 RUN chmod a+x /run.sh
-
-# Disable astro telemetry
-RUN bunx astro telemetry disable
-
-WORKDIR /webserver
 
 CMD [ "/run.sh" ]
