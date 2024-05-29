@@ -9,7 +9,7 @@ console.log('CSS build finished ✓')
 // build the server
 await Bun.build({
   entrypoints: ['./src/index.ts'],
-  outdir: './dist/server.js',
+  outdir: './dist',
   target: 'bun',
 })
 

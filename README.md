@@ -14,7 +14,7 @@ This repository contains the following add-ons
 <!-- ![Supports armv7 Architecture][armv7-shield] -->
 <!-- ![Supports i386 Architecture][i386-shield] -->
 
-_Document stuff with Markdown based on Astro Starlight_
+_Document stuff with Markdown_
 
 <!--
 
