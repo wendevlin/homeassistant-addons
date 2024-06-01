@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 2.0.2
+
+- Fixed serving of assets
+- enabled bun smol mode to reduce memory usage
+- added styled 404 page
+
 ## 2.0.1
 
 - Use pre built image

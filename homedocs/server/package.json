@@ -6,7 +6,8 @@
     "dev": "bun run --watch src/index.ts",
     "start": "bun src/index.ts",
     "start:production": "NODE_ENV=production bun src/index.ts",
-    "build": "bun run --bun scripts/build.ts"
+    "build": "bun run --bun scripts/build.ts",
+    "biome:fix": "biome check --apply src"
   },
   "dependencies": {
     "@kitajs/html": "4.1.0",

@@ -19,9 +19,9 @@ RUN if [[ $(uname -m) == "aarch64" ]] ; \
     fi
 
 # Install Bun
-RUN npm install -g bun
+RUN npm install -g bun@1.1.12
 
-# Copy starlight data
+# Copy server into image
 COPY server /server
 WORKDIR /server
 

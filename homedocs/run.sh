@@ -5,7 +5,7 @@ if [ -z "$(ls -A /config/homedocs)" ]; then
     mkdir -p /config/homedocs
     echo "created /config/homedocs directory."
 
-    # copy the example contents of the "/starlight/src/content/docs" directory to the "/config/homedocs" directory.
+    # copy the example contents of the "/server/docs" directory to the "/config/homedocs" directory.
     cp -r /server/docs/* /config/homedocs
     echo "copied example content to /config/homedocs."
 else
