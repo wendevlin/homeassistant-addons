@@ -1,4 +1,4 @@
-import type { NavigationEntry } from '../utils/types'
+import type { NavigationEntry } from '../htmlBuilder/types'
 
 const subNavigation = (
 	navigation: NavigationEntry[],

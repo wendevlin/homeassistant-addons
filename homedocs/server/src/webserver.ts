@@ -2,6 +2,7 @@ import type { BunFile } from 'bun'
 import { Elysia } from 'elysia'
 import notFoundPage from './templates/404'
 import environmentVariables from './utils/environmentVariables'
+import { buildDocsInOnePage } from './htmlBuilder'
 
 export const webserver = new Elysia({
 	serve: {
@@ -14,8 +15,12 @@ export const webserver = new Elysia({
 	const fileName = path.split('/').pop() ?? ''
 	if (fileName === 'main.css') {
 		return Bun.file('./dist/main.css')
+	}	else if (fileName === 'robots.txt') {
+		return Bun.file('./public/robots.txt')
 	} else if (fileName.startsWith('favicon')) {
 		return Bun.file('./public/favicon.svg')
+	} else if (path === '/html-export') {
+		return buildDocsInOnePage()
 	} else if (
 		fileName.includes('.') &&
 		(fileName.split('.').pop()?.length ?? 0) > 1

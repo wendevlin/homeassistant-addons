@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 2.0.3
+
+- Add robots.txt disallowing all bots
+- improve logs with date and time
+- Experimental: Add html export all pages at once to print it to PDF
+
 ## 2.0.2
 
 - Fixed serving of assets

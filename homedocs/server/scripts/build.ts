@@ -1,10 +1,11 @@
 // import { build } from "bun"
+import logger from "../src/utils/logger"
 import { buildCss } from "./tailwind"
 
 // build css with tailwind and daisyui
 await buildCss()
 
-console.log('CSS build finished ✓')
+logger.info('CSS build finished ✓')
 
 // build the server
 // TODO use optimized bun build
@@ -14,4 +15,4 @@ console.log('CSS build finished ✓')
 //   target: 'bun',
 // })
 
-console.log('Server build finished ✓')
+logger.info('Server build finished ✓')

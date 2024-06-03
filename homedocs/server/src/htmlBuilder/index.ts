@@ -1,9 +1,13 @@
-import { $ } from 'bun'
+import { $, FileSink } from 'bun'
 import layout from '../templates/layout'
 import { generateNavigation } from '../templates/navigation'
 import environmentVariables from '../utils/environmentVariables'
 import { generateNavForFolder } from './navigation'
-import type { NavigationEntry } from './types'
+import type { Breadcrumb, NavigationEntry } from './types'
+import layoutTop from '../templates/merged/layoutTop'
+import layoutBottom from '../templates/merged/layoutBottom'
+import page from '../templates/merged/page'
+import logger from '../utils/logger'
 
 const buildHtml = async (
 	navigationEntry: NavigationEntry,
@@ -21,7 +25,7 @@ const buildHtml = async (
 	).toString()
 	const fileName = `./dist/docs/${navigationEntry.path || 'index'}.html`
 	await Bun.write(fileName, `<!doctype html>${html}`)
-	console.log(`Built ${fileName}`)
+	logger.info(`Built ${fileName}`)
 }
 
 const buildLevel = async (
@@ -49,3 +53,64 @@ export const buildDocs = async () => {
 
 	await buildLevel(navigationStructure, navigationStructure)
 }
+
+const buildLevelInOnePage = (
+	writer: FileSink,
+	navigationStructure: NavigationEntry[],
+	breadcrumbs: Breadcrumb[] = [],
+) => {
+	for (const navigationEntry of navigationStructure) {
+		if (typeof navigationEntry.htmlContent === 'string') {
+			writer.write(page(
+				navigationEntry.title,
+				navigationEntry.htmlContent,
+				[
+					...breadcrumbs,
+					{
+						name: navigationEntry.title,
+						isFolder: false,
+					},
+				],
+			).toString())
+			writer.flush()
+		}
+
+		if (navigationEntry.children) {
+			buildLevelInOnePage(
+				writer,
+				navigationEntry.children,
+				[
+					...breadcrumbs,
+					{
+						name: navigationEntry.title,
+						isFolder: navigationEntry.htmlContent === undefined,
+					},
+				],
+			)
+		}
+	}
+}
+
+export const buildDocsInOnePage = async () => {
+	const navigationStructure = await generateNavForFolder(
+		environmentVariables.docsBasePath,
+	)
+
+	await Bun.$`rm ./dist/mergedDocs.html`.quiet()
+
+	const file = Bun.file('./dist/mergedDocs.html')
+	const writer = file.writer();
+
+	writer.write(layoutTop)
+	writer.flush()
+
+	buildLevelInOnePage(writer, navigationStructure)
+
+	writer.write(layoutBottom)
+	writer.flush()
+	writer.end()
+
+	return file
+}
+
+await buildDocsInOnePage()

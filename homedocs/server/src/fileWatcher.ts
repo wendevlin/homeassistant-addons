@@ -1,6 +1,7 @@
 import chokidar from 'chokidar'
 import { buildDocs } from './htmlBuilder'
 import environmentVariables from './utils/environmentVariables'
+import logger from './utils/logger'
 
 let timeout: Timer | null = null
 
@@ -10,9 +11,9 @@ const triggerNewBuild = async () => {
 	}
 
 	timeout = setTimeout(async () => {
-		console.log('Triggering new build')
+		logger.info('Change detected')
 		await buildDocs()
-		console.log('Docs rebuilt')
+		logger.info('Docs rebuilt')
 	}, 1000)
 }
 
@@ -21,7 +22,7 @@ export const startWatcher = () => {
 		// TODO do not rebuild everything, only if needed
 		triggerNewBuild()
 	})
-	console.log(
+	logger.info(
 		`Watcher started, watching for changes in "${environmentVariables.docsBasePath}" folder`,
 	)
 }

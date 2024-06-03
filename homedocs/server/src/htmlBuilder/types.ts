@@ -7,3 +7,8 @@ export type NavigationEntry = {
 	children?: NavigationEntry[]
 	pathPrefix?: string
 }
+
+export type Breadcrumb = {
+	name: string
+	isFolder: boolean
+}

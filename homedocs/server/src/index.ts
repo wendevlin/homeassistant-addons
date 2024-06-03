@@ -1,5 +1,6 @@
 import { buildCss } from '../scripts/tailwind'
 import { startWatcher } from './fileWatcher'
+import logger from './utils/logger'
 import { webserver } from './webserver'
 
 // 2 parts
@@ -13,15 +14,15 @@ import { webserver } from './webserver'
 
 // if dev mode only rebuild css
 if (process.env.NODE_ENV !== 'production') {
-	console.log('Homedocs is running in development mode')
+	logger.info('Homedocs is running in development mode')
 	await buildCss()
-	console.log('Css built')
+	logger.info('Css built')
 }
 
 startWatcher()
 // await buildDocs()
-// console.log('Initial docs built')
+// logger.info('Initial docs built')
 
 webserver.listen(3000)
 
-console.log(`🦊 Elysia is running at ${webserver.server?.url}`)
+logger.info(`🦊 Elysia is running at ${webserver.server?.url}`)
