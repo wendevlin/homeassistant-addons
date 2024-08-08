@@ -1,6 +1,6 @@
 /*
 This file includes code originally written by ParkSB under the MIT License.
-Modifications have been made by Wendelin Peleska (masterwendu).
+Modifications have been made by Wendelin Peleska (wendevlin).
 
 Original License:
 Permission is hereby granted, free of charge, to any person

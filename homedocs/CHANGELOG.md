@@ -1,5 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 2.0.4
+
+- Switch username to wendevlin
+- Bump docker/login-action from 3.2.0 to 3.3.0
+
 ## 2.0.3
 
 - Add robots.txt disallowing all bots

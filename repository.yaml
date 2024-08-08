@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
 name: Homedocs add-on repository
-url: 'https://github.com/masterwendu/homeassistant-addons'
+url: 'https://github.com/wendevlin/homeassistant-addons'
 maintainer: Wendelin Peleska <contact@wendelin.dev>

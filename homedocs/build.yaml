@@ -8,7 +8,7 @@ build_from:
 labels:
   org.opencontainers.image.title: "Homedocs"
   org.opencontainers.image.description: "Document stuff with Markdown"
-  org.opencontainers.image.source: "https://github.com/masterwendu/homeassistant-addons/tree/main/homedocs"
+  org.opencontainers.image.source: "https://github.com/wendevlin/homeassistant-addons/tree/main/homedocs"
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
   TEMPIO_VERSION: "2024.04.0"
