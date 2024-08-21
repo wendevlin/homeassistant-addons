@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 2.0.5
+
+- switch base image to debian
+
 ## 2.0.4
 
 - Switch username to wendevlin

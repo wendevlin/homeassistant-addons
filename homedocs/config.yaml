@@ -1,6 +1,6 @@
 name: Homedocs (Beta)
 description: Document stuff with Markdown
-version: "2.0.4"
+version: "2.0.5"
 slug: homedocs_beta
 init: false
 url: https://github.com/wendevlin/homeassistant-addons/tree/beta/homedocs
