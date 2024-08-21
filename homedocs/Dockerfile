@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y unzip
 
 # Install Bun
 RUN curl -fsSL https://bun.sh/install | bash -s "bun-v1.1.24"
+RUN export PATH=~/.bun/bin:$PATH
 
 # Copy server into image
 COPY server /server
