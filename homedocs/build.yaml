@@ -6,9 +6,9 @@ build_from:
   # armv7: "ghcr.io/home-assistant/armv7-base:3.19"
   # i386: "ghcr.io/home-assistant/i386-base:3.19"
 labels:
-  org.opencontainers.image.title: "Homedocs"
+  org.opencontainers.image.title: "Homedocs (Beta)"
   org.opencontainers.image.description: "Document stuff with Markdown"
-  org.opencontainers.image.source: "https://github.com/wendevlin/homeassistant-addons/tree/main/homedocs"
+  org.opencontainers.image.source: "https://github.com/wendevlin/homeassistant-addons/tree/beta/homedocs"
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
   TEMPIO_VERSION: "2024.04.0"

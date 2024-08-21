@@ -1,9 +1,9 @@
-name: Homedocs
+name: Homedocs (Beta)
 description: Document stuff with Markdown
 version: "2.0.4"
-slug: homedocs
+slug: homedocs_beta
 init: false
-url: https://github.com/wendevlin/homeassistant-addons/tree/main/homedocs
+url: https://github.com/wendevlin/homeassistant-addons/tree/beta/homedocs
 arch:
   - aarch64
   - amd64
@@ -21,4 +21,4 @@ ports_description:
   3000/tcp: Web interface (Not required for Ingress)
 panel_icon: mdi:text-box-outline
 panel_admin: false
-image: "ghcr.io/wendevlin/{arch}-addon-homedocs"
+image: "ghcr.io/wendevlin/{arch}-addon-homedocs-beta"
