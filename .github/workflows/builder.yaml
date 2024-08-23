@@ -68,10 +68,10 @@ jobs:
         addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
         arch: [
           "aarch64",
-          "amd64"
-          # "armhf",
-          # "armv7",
-          # "i386"
+          "amd64",
+          "armhf",
+          "armv7",
+          "i386"
         ]
     permissions:
       contents: read
