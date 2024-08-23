@@ -19,4 +19,4 @@ fi
 # BUILD_TIMEOUT_IN_SECONDS=$(bashio::config 'buildTimeoutInSeconds')
 
 # start the webserver
-DOCS_BASE_PATH=/config/homedocs ~/.bun/bin/bun run start:production
+DOCS_BASE_PATH=/config/homedocs node dist/index.cjs

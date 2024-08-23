@@ -2,17 +2,14 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # install dependencies
-RUN apt-get update && apt-get install -y unzip
-
-# Install Bun
-RUN curl -fsSL https://bun.sh/install | bash -s "bun-v1.1.24"
+RUN apk add nodejs-current npm
 
 # Copy server into image
 COPY server /server
 WORKDIR /server
 
-RUN ~/.bun/bin/bun install
-RUN ~/.bun/bin/bun run build
+RUN npm install
+RUN npm run build
 
 # copy and setup run script
 COPY run.sh /

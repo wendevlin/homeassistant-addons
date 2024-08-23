@@ -1,9 +1,0 @@
-# Reduce memory usage at the cost of performance
-smol = true
-telemetry = false
-
-[install]
-exact = true
-
-# Reduce memory usage at the cost of performance
-smol = true

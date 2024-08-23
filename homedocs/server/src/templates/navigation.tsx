@@ -1,15 +1,16 @@
+import type { FC } from 'hono/jsx'
 import type { NavigationEntry } from '../htmlBuilder/types'
 
-const subNavigation = (
-	navigation: NavigationEntry[],
-	pathPrefix: string,
-	active: NavigationEntry,
-) => (
+const SubNavigation: FC<{
+	navigation: NavigationEntry[]
+	pathPrefix: string
+	active: NavigationEntry
+}> = ({ navigation, pathPrefix, active }) => (
 	<>
 		{navigation.map(({ title, children, path }) => (
 			<li>
 				{path === undefined ? (
-					<span class="hover:bg-nav dark:hover:bg-nav-dark hover:cursor-default">
+					<span class="hover:bg-nav dark:hover:bg-nav-dark hover:cursor-default active:bg-nav dark:active:bg-nav-dark">
 						<svg
 							class="w-4 -ml-1 -mr-1 dark:fill-white"
 							aria-hidden="true"
@@ -21,7 +22,7 @@ const subNavigation = (
 					</span>
 				) : (
 					<a
-						class={[
+						className={[
 							title === active.title && path === active.path
 								? 'bg-active dark:bg-active-dark text-white dark:text-black hover:bg-active dark:hover:bg-active-dark'
 								: '',
@@ -32,7 +33,13 @@ const subNavigation = (
 					</a>
 				)}
 				{children !== undefined ? (
-					<ul>{subNavigation(children, pathPrefix, active)}</ul>
+					<ul>
+						<SubNavigation
+							navigation={children}
+							pathPrefix={pathPrefix}
+							active={active}
+						/>
+					</ul>
 				) : (
 					''
 				)}
@@ -41,12 +48,16 @@ const subNavigation = (
 	</>
 )
 
-export const generateNavigation = (
-	navigation: NavigationEntry[],
-	pathPrefix: string,
-	active: NavigationEntry,
-) => (
+export const Navigation: FC<{
+	navigation: NavigationEntry[]
+	pathPrefix: string
+	active: NavigationEntry
+}> = ({ navigation, pathPrefix, active }) => (
 	<ul class="menu w-64 bg-nav dark:bg-nav-dark h-full py-5 pr-5 flex-nowrap overflow-auto">
-		{subNavigation(navigation, pathPrefix, active)}
+		<SubNavigation
+			navigation={navigation}
+			pathPrefix={pathPrefix}
+			active={active}
+		/>
 	</ul>
 )

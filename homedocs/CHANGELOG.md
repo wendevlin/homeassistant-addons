@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 3.0.0
+
+- migration to nodejs 22 with hono server
+
 ## 2.0.6
 
 - fix run command for bun server

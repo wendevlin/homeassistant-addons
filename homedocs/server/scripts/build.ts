@@ -1,4 +1,4 @@
-// import { build } from "bun"
+import { build } from 'esbuild'
 import logger from "../src/utils/logger"
 import { buildCss } from "./tailwind"
 
@@ -8,11 +8,19 @@ await buildCss()
 logger.info('CSS build finished ✓')
 
 // build the server
-// TODO use optimized bun build
-// await Bun.build({
-//   entrypoints: ['./src/index.ts'],
-//   outdir: './dist',
-//   target: 'bun',
-// })
+const buildOutput = await build({
+  entryPoints: ['./src/index.ts'],
+  outfile: './dist/index.cjs',
+  platform: 'node',
+  bundle: true,
+})
+
+buildOutput.errors.forEach(error => {
+  logger.error(error.text)
+})
+
+buildOutput.warnings.forEach(warning => {
+  logger.warn(warning.text)
+})
 
 logger.info('Server build finished ✓')
