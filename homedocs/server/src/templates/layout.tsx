@@ -1,9 +1,9 @@
-export default (
-	title: string,
-	content: string,
-	navigation: JSX.Element,
-	pathPrefix: string,
-) => (
+import type { JSXNode } from 'hono/jsx'
+import type { FC, PropsWithChildren } from 'hono/jsx'
+
+const layout: FC<
+	PropsWithChildren<{ content: string; pathPrefix: string }>
+> = ({ content, children, pathPrefix }) => (
 	<html lang="en">
 		<head>
 			<title>Homedocs</title>
@@ -38,7 +38,10 @@ export default (
 			<div class="drawer lg:drawer-open">
 				<input id="navigation-drawer" type="checkbox" class="drawer-toggle" />
 				<div class="drawer-content flex flex-col items-center justify-start">
-					<div class="prose py-10 px-3 max-w-screen-xl w-full">{content}</div>
+					<div
+						class="prose py-10 px-3 max-w-screen-xl w-full"
+						dangerouslySetInnerHTML={{ __html: content }}
+					/>
 				</div>
 				<div class="drawer-side">
 					<label
@@ -46,9 +49,11 @@ export default (
 						aria-label="close sidebar"
 						class="drawer-overlay"
 					/>
-					{navigation}
+					{children}
 				</div>
 			</div>
 		</body>
 	</html>
 )
+
+export default layout

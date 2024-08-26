@@ -1,4 +1,6 @@
-export default (path: string) => (
+import type { FC } from 'hono/jsx'
+
+const Page: FC<{ path: string }> = ({ path }) => (
 	<html lang="en">
 		<head>
 			<title>Homedocs - 404 Not Found</title>
@@ -25,3 +27,5 @@ export default (path: string) => (
 		</body>
 	</html>
 )
+
+export default Page

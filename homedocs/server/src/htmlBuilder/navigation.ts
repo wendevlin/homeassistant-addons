@@ -84,20 +84,19 @@ export const generateNavForFolder = async (
 		.sort((a, b) => {
 			if (a.mainIndex) {
 				return -1
-			} else if (b.mainIndex) {
-				return 1
-			} else {
-				return a.title.localeCompare(b.title)
 			}
+			if (b.mainIndex) {
+				return 1
+			}
+			return a.title.localeCompare(b.title)
 		})
 		.map(({ mainIndex, children, ...rest }) => {
 			if (!children?.length) {
 				return rest
-			} else {
-				return {
-					...rest,
-					children,
-				}
+			}
+			return {
+				...rest,
+				children,
 			}
 		})
 }

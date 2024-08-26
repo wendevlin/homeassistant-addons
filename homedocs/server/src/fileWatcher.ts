@@ -3,9 +3,9 @@ import { buildDocs } from './htmlBuilder'
 import environmentVariables from './utils/environmentVariables'
 import logger from './utils/logger'
 
-let timeout: Timer | null = null
+let timeout: NodeJS.Timeout | null = null
 
-const triggerNewBuild = async () => {
+export const triggerNewBuild = async () => {
 	if (timeout) {
 		clearTimeout(timeout)
 	}

@@ -1,9 +1,11 @@
 import postcss from 'postcss'
+import { readFile } from 'node:fs/promises'
 import autoprefixer from 'autoprefixer'
 import tw, { type Config } from 'tailwindcss'
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
 import cssnano from 'cssnano'
+import { safeWriteFileToPath } from '../src/utils/file'
 
 const tailwindConfig: Config = {
   content: ["./src/**/*.tsx"],
@@ -33,9 +35,7 @@ const tailwindConfig: Config = {
  * @returns {Promise<void>} A promise that resolves when the CSS file is built.
  */
 export const buildCss = async () => {
-	const sourceText = await Bun.file('./src/css/main.css').text()
-  const tailwind = tw(tailwindConfig)
-  const autoprefixerPlugin = autoprefixer()
+  const sourceText = await readFile('./src/css/main.css')
   const { css } = await postcss([
     tw(tailwindConfig),
     autoprefixer(),
@@ -49,5 +49,5 @@ export const buildCss = async () => {
     }
   )
 
-  await Bun.write('./dist/main.css', css)
+  await safeWriteFileToPath('./dist/main.css', css)
 };

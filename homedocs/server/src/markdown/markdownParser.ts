@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises'
 import markdownit from 'markdown-it'
 import type Markdownit from 'markdown-it'
 import { full as emoji } from 'markdown-it-emoji'
@@ -17,26 +18,31 @@ const md = markdownit({
 	.use(frontMatterPlugin) as MarkdownIt
 
 export const parseFile = async (filePath: string, filename: string) => {
-	const markdownContentFile = Bun.file(filePath)
-	const markdownContent = await markdownContentFile.text()
-	const htmlContent = md.render(markdownContent, { filePath })
+	try {
+		const markdownContentFile = await readFile(filePath)
+		const markdownContent = markdownContentFile.toString()
+		const htmlContent = md.render(markdownContent, { filePath })
 
-	let title = filename
+		let title = filename
 
-	if (title.endsWith('.md')) {
-		title =
-			filePath === 'docs/index.md'
-				? 'Homedocs'
-				: filename.substring(0, filename.length - 3)
-	}
+		if (title.endsWith('.md')) {
+			title =
+				filePath === 'docs/index.md'
+					? 'Homedocs'
+					: filename.substring(0, filename.length - 3)
+		}
 
-	if (md.frontMatterData?.title) {
-		title = md.frontMatterData.title
-	}
-	md.frontMatterData = {} // reset frontmatter data
+		if (md.frontMatterData?.title) {
+			title = md.frontMatterData.title
+		}
+		md.frontMatterData = {} // reset frontmatter data
 
-	return {
-		title,
-		content: htmlContent,
+		return {
+			title,
+			content: htmlContent,
+		}
+	} catch (error) {
+		console.error(`markdownParser::parseFile: Error reading file: ${filePath}`)
+		throw error
 	}
 }
