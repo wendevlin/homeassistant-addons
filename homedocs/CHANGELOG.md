@@ -1,3 +1,7 @@
+## 3.0.2
+
+-- Bump home-assistant/builder from 2024.08.1 to 2024.08.2
+
 ## 3.0.1
 
 - migration to nodejs 22 with hono server
