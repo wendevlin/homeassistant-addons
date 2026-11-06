@@ -1,14 +1,13 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+# Bun only supports aarch64 and amd64. The Dockerfile brings its own base image.
 build_from:
-  aarch64: "ghcr.io/home-assistant/aarch64-base:3.20"
-  amd64: "ghcr.io/home-assistant/amd64-base:3.20"
-  armhf: "ghcr.io/home-assistant/armhf-base:3.20"
-  armv7: "ghcr.io/home-assistant/armv7-base:3.20"
-  i386: "ghcr.io/home-assistant/i386-base:3.20"
+  aarch64: "oven/bun:1.4.2-alpine"
+  amd64: "oven/bun:1.4.2-alpine"
 labels:
   org.opencontainers.image.title: "Homedocs (Beta)"
-  org.opencontainers.image.description: "Document stuff with Markdown"
-  org.opencontainers.image.source: "https://github.com/wendevlin/homeassistant-addons/tree/beta/homedocs"
+  org.opencontainers.image.description: "Document your home with Markdown"
+  org.opencontainers.image.source: "https://github.com/wendevlin/homedocs"
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
-  TEMPIO_VERSION: "2024.04.0"
+  # commit of https://github.com/wendevlin/homedocs that this version builds
+  HOMEDOCS_REF: "8b0014f4f16ff36e76c5c730d05f1c1880d1ba9a"

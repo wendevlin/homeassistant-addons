@@ -1,24 +1,37 @@
 name: Homedocs (Beta)
-description: Document stuff with Markdown
-version: "3.0.1"
+description: Document your home with Markdown
+version: "4.0.0-beta.1"
 slug: homedocs_beta
+url: https://github.com/wendevlin/homedocs
 init: false
-url: https://github.com/wendevlin/homeassistant-addons/tree/beta/homedocs
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 startup: services
+# the docs moved from the Home Assistant config folder to the app's own folder
+breaking_versions:
+  - "4.0.0-beta.1"
 map:
-  - config:rw
+  # the docs, visible as /addon_configs/<repo>_homedocs_beta (Samba, Studio Code Server)
+  - type: app_config
+    read_only: false
+  # read-only, only to copy the docs of Homedocs 3.x from /config/homedocs once
+  - type: homeassistant_config
+    read_only: true
 ingress: true
-ingress_port: 3000
+ingress_port: 8099
 ports:
-  3000/tcp: null
+  8098/tcp: 8098
 ports_description:
-  3000/tcp: Web interface (Not required for Ingress)
+  8098/tcp: Share links (only shared pages, no login)
+# user list, to know who is an administrator
+homeassistant_api: true
+# host IP and port mapping, for the local share link address
+hassio_api: true
 panel_icon: mdi:text-box-outline
 panel_admin: false
+options:
+  max_upload_mb: 50
+schema:
+  max_upload_mb: int(1,1000)
 image: "ghcr.io/wendevlin/{arch}-addon-homedocs-beta"

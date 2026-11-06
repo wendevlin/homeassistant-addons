@@ -1,21 +1,41 @@
-# Home Assistant Add-on: Homedocs
+# Homedocs
 
-This addon helps you document stuff around your home inside home assistant in a nice way.
+Document your home with Markdown, right inside Home Assistant.
 
-## How to use
+## Where your docs are
 
-1. Install the addon
-2. Start the addon
-3. the addon creates a folder called `homedocs` in your config folder
-4. the addon copies some sample data to this folder
-5. edit the markdown files in the `homedocs` folder
-6. The addon will recognize the changes and build the site
-7. open the webui to see your beautiful documentation
+Your pages are markdown files in the app's configuration folder,
+`/addon_configs/<repo>_homedocs_beta`. Open it with the Samba or the Studio Code Server app to edit
+files directly, or edit them in the browser. Changes on disk show up right away.
 
-### how to edit the documentation
+On the first start, Homedocs copies the example pages there. If you used Homedocs 3.x, it copies
+your docs from `/config/homedocs` instead (once). The old folder is not changed; you can delete it
+after checking that everything was copied.
 
-The documentation lies in your `config` directory under `homedocs`. When you edit or add/remove the markdown files, your changes will be build and you will see the changes inside the webui.
+## Who can do what
 
-#### Use the Studio Code Server addon
+- Everyone who can open the app in Home Assistant can read.
+- Administrators can always edit. On the **Users** page they choose which other users can edit.
+- Turn on **Edit mode** in the sidebar to edit pages and to create, rename, move or delete pages
+  and folders.
 
-I recommend to use the [Studio Code Server](https://github.com/hassio-addons/addon-vscode) to edit your documentation, because it is very convenient to edit markdown files with it and you can just drag and drop files into the addon.
+## Share links and QR codes
+
+Administrators can share a page or a whole folder with a link, e.g. as a QR code stuck on a device.
+The link opens without a Home Assistant login and shows only what was shared. Open a page's ⋮ menu
+and choose **Share page** or **Share folder**.
+
+Share links are served on port **8098**, which only serves shared pages:
+
+- **Local network:** works on devices in your home network. If you disable port 8098 in the app's
+  network settings, local links stop working.
+- **Remote:** to open links from anywhere, make port 8098 reachable through a reverse proxy or a
+  tunnel and enter its URL on the **Sharing** page. **Check** tests whether the URL reaches
+  Homedocs.
+
+All administrators see every share link on the **Sharing** page, and can disable or delete them.
+Search engines are asked not to index anything.
+
+## Options
+
+- `max_upload_mb`: largest file that can be attached to a page, in MB (default 50).

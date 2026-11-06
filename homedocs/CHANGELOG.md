@@ -1,5 +1,24 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 4.0.0-beta.1
+
+Complete rewrite, the code now lives in [wendevlin/homedocs](https://github.com/wendevlin/homedocs).
+
+**Breaking: your docs move.** They are no longer in the `homedocs` folder of your Home Assistant
+configuration but in the app's own folder, `/addon_configs/<repo>_homedocs_beta` (Samba, Studio
+Code Server). On the first start they are copied over once; the old folder is left untouched and
+you can delete it after checking that everything is there.
+
+- Read and edit pages right in the browser (visual and markdown editor), attach files
+- Create, rename, move, reorder and delete pages and folders
+- See who is editing a page; no more lost changes when a file changed on disk meanwhile
+- Administrators choose which other users can edit
+- Print or save one page or all pages as PDF
+- Share a page or a folder with a link and QR code, without a Home Assistant login. Links can be
+  disabled or deleted at any time. They open on port 8098 (local network), or through a remote URL
+  you set up yourself
+- Only aarch64 and amd64 are supported
+
 ## 3.0.0
 
 - migration to nodejs 22 with hono server
